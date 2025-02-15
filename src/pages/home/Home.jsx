@@ -1,13 +1,20 @@
 import ExpenseModalForm from "@/components/organims/dialog/ExpenseDialogForm";
 import ExpenseTable from "@/components/organims/table/ExpenseTable";
-import { Button } from "@chakra-ui/react";
-import { useCallback, useEffect, useState} from "react";
+import { Button, Text } from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "@/config/config";
 import { Toaster } from "@/components/chakra/toaster";
 import AlertDialog from "@/components/organims/dialog/AlertDialog";
 import SearchInput from "@/components/atoms/inputs/SearchInput";
 import WeekPicker from "@/components/atoms/date-picker/WeekPicker";
 import { filterExpensesByDate, weekToDateRange } from "@/utils/utils";
+import {
+  SearchContainer,
+  HeaderContainer,
+  WeekPickerContainer,
+  PageContainer,
+} from "./homeStyle";
+import { darkTheme } from "@/theme/theme";
 
 const Home = () => {
   //dialog states
@@ -68,15 +75,34 @@ const Home = () => {
     setExpenseData(updatedData);
   };
 
-
   return (
-    <>
-      <WeekPicker onChange={onSelectWeekPicker} />
-      <SearchInput
-        placeHolder={"Search by description"}
-        onChange={onSearchDescription}
+    <PageContainer>
+      <HeaderContainer>
+        <Text textStyle={"3xl"}>Expense Tracker</Text>
+        <Button background={darkTheme.primary} onClick={onAddExpenseHandler}>
+          Add Expense
+        </Button>
+      </HeaderContainer>
+      <HeaderContainer>
+        <SearchContainer>
+          <SearchInput
+            placeHolder={"Search by description"}
+            onChange={onSearchDescription}
+          />
+        </SearchContainer>
+        <WeekPickerContainer>
+          <Text>
+            Filter:
+          </Text>
+          <WeekPicker onChange={onSelectWeekPicker} />
+        </WeekPickerContainer>
+      </HeaderContainer>
+      <ExpenseTable
+        items={expenseData}
+        onEditExpense={onEditExpenseHandler}
+        onDeleteExpense={onDeleteExpenseHandler}
       />
-      <Button onClick={onAddExpenseHandler}>Add Expense</Button>
+      <Toaster />
       <ExpenseModalForm
         isFormOpened={isOpenAddExpenseForm}
         setIsFormOpened={setIsOpenAddExpenseForm}
@@ -91,13 +117,7 @@ const Home = () => {
         isOpenDeleteExpenseAlert={isOpenDeleteExpenseAlert}
         setIsOpenDeleteExpenseAlert={setIsOpenDeleteExpenseAlert}
       />
-      <ExpenseTable
-        items={expenseData}
-        onEditExpense={onEditExpenseHandler}
-        onDeleteExpense={onDeleteExpenseHandler}
-      />
-      <Toaster />
-    </>
+    </PageContainer>
   );
 };
 

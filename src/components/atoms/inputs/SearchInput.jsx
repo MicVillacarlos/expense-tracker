@@ -5,7 +5,7 @@ import { SearchIcon } from "../icons/SearchIcon";
 
 const SearchInput = ({ placeHolder, onChange }) => {
   return (
-    <InputGroup startElement={<SearchIcon width={"20px"} height={"20px"}/>}>
+    <InputGroup width={"100%"} startElement={<SearchIcon width={"100%"} height={"20px"}/>}>
       <Input placeholder={placeHolder} onChange={onChange} />
     </InputGroup>
   );

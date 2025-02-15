@@ -15,6 +15,7 @@ import { Field } from "@/components/chakra/field";
 import { useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "@/config/config";
 import { generateRandomId, today } from "@/utils/utils";
+import { darkTheme } from "@/theme/theme";
 
 // eslint-disable-next-line react/prop-types
 const ExpenseModalForm = ({
@@ -114,11 +115,11 @@ const ExpenseModalForm = ({
       open={isFormOpened}
       onOpenChange={(e) => setIsFormOpened(e.open)}
     >
-      <DialogContent>
+      <DialogContent >
         <DialogHeader>
           <DialogTitle>{mode == "edit" ? "Edit" : "Add"}Expense</DialogTitle>
         </DialogHeader>
-        <DialogBody>
+        <DialogBody background={darkTheme.body}>
           <form onSubmit={handleSubmit}>
             <HStack gap="8" width="full" marginBottom={10}>
               <Field label="First Name" required>

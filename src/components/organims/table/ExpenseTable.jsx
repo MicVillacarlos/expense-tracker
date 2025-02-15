@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { darkTheme } from "@/theme/theme";
 import { Table, Button } from "@chakra-ui/react";
 import { useMemo } from "react";
 
@@ -12,7 +13,7 @@ const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
   }, [items]);
 
   return (
-    <Root size="sm" showColumnBorder>
+    <Root size="sm" showColumnBorder background={darkTheme.primary} colorPalette={'blue'}>
       <Header>
         <Row>
           <ColumnHeader>First Name</ColumnHeader>

@@ -1,11 +1,15 @@
+import { ThemeProvider } from "styled-components";
 import "./App.css";
 import Home from "./pages/home/Home";
+import {GlobalStyles, darkTheme} from "./theme/theme";
 
 function App() {
-
   return (
     <>
-      <Home/>
+      <ThemeProvider theme={darkTheme}>
+      <GlobalStyles />
+        <Home />
+      </ThemeProvider>
     </>
   );
 }
