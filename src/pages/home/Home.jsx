@@ -68,18 +68,26 @@ const Home = () => {
   };
 
   const onSelectWeekPicker = (event) => {
-    const dateRange = weekToDateRange(event.target.value);
-    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-    const parsedStoredData = JSON.parse(storedData);
-    const updatedData = filterExpensesByDate(parsedStoredData, dateRange);
-    setExpenseData(updatedData);
+    const value = event.target.value;
+    if (value) {
+      const dateRange = weekToDateRange(value);
+      const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const parsedStoredData = JSON.parse(storedData);
+      const updatedData = filterExpensesByDate(parsedStoredData, dateRange);
+      setExpenseData(updatedData);
+    } else {
+      fetchData();
+    }
   };
 
   return (
     <PageContainer>
       <HeaderContainer>
         <Text textStyle={"3xl"}>Expense Tracker</Text>
-        <Button background={darkTheme.quarternary} onClick={onAddExpenseHandler}>
+        <Button
+          background={darkTheme.quarternary}
+          onClick={onAddExpenseHandler}
+        >
           Add Expense
         </Button>
       </HeaderContainer>
@@ -91,9 +99,7 @@ const Home = () => {
           />
         </SearchContainer>
         <WeekPickerContainer>
-          <Text>
-            Filter:
-          </Text>
+          <Text>Filter:</Text>
           <WeekPicker onChange={onSelectWeekPicker} />
         </WeekPickerContainer>
       </HeaderContainer>

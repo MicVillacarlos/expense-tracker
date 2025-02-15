@@ -166,6 +166,7 @@ const ExpenseModalForm = ({
                   placeholder="Input Price"
                   variant="subtle"
                   background={darkTheme.transparent}
+                  min="0"
                 />
               </Field>
               <Field label="Date" required>

@@ -25,10 +25,10 @@ const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
             <ColumnHeader>Expense</ColumnHeader>
             <ColumnHeader>Description</ColumnHeader>
             <ColumnHeader textAlign="end">Price</ColumnHeader>
-            <ColumnHeader color={darkTheme.primary} textAlign="start">
+            <ColumnHeader textAlign="start">
               Date
             </ColumnHeader>
-            <ColumnHeader color={darkTheme.primary} textAlign="center">
+            <ColumnHeader textAlign="center">
               Action
             </ColumnHeader>
           </Row>

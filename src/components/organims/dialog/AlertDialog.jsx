@@ -10,6 +10,7 @@ import {
 } from "@/components/chakra/dialog";
 import { Button } from "@chakra-ui/react";
 import { LOCAL_STORAGE_KEY } from "@/config/config";
+import { toaster } from "@/components/chakra/toaster";
 
 const AlertDialog = ({
   selectedExpenseId,
@@ -26,6 +27,11 @@ const AlertDialog = ({
     const updatedExpenses = expenses.filter(expense => expense.id !== selectedExpenseId);
 
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedExpenses));
+
+    toaster.success({
+      description: "Expense Deleted Successfully",
+      type: "Success",
+    });
 
     // Close dialog
     setSelectedExpenseId("");
