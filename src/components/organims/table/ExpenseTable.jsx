@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Table } from "@chakra-ui/react";
 
-const TableTracker = (props) => {
+const ExpenseTable = (props) => {
   const { items } = props;
   const { Header, Body, Row, ColumnHeader, Cell, Root } = Table;
   return (
@@ -26,4 +26,4 @@ const TableTracker = (props) => {
   );
 };
 
-export default TableTracker;
+export default ExpenseTable;

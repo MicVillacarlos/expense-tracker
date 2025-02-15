@@ -1,4 +1,4 @@
-import TableTracker from "@/components/organims/table/TableTracker";
+import ExpenseTable from "@/components/organims/table/ExpenseTable";
 
 const Home = () => {
   const dummyItems = [
@@ -8,7 +8,12 @@ const Home = () => {
     { id: 4, name: "Smartphone", category: "Electronics", price: "$900" },
     { id: 5, name: "Backpack", category: "Accessories", price: "$60" },
   ];
-  return <TableTracker items={dummyItems} />;
+  return (
+      <>
+          
+      <ExpenseTable items={dummyItems} />
+    </>
+  );
 };
 
 export default Home;
