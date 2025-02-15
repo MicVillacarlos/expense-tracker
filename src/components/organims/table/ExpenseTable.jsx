@@ -2,8 +2,9 @@
 import DeleteIcon from "@/components/atoms/icons/DeleteIcon";
 import { EditIcon } from "@/components/atoms/icons/EditIcon";
 import { darkTheme } from "@/theme/theme";
-import { Table, Button} from "@chakra-ui/react";
+import { Table, Button } from "@chakra-ui/react";
 import { useMemo } from "react";
+import EmptyTable from "./EmptyTable";
 
 const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
   const { Header, Body, Row, ColumnHeader, Cell, Root, ScrollArea } = Table;
@@ -14,9 +15,9 @@ const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
       .toFixed(2);
   }, [items]);
 
-  return (
+  return items.length ? (
     <ScrollArea borderWidth="0.5px" rounded="md">
-      <Root size="sm" showColumnBorder background={darkTheme.primary}>
+      <Root size="sm" showColumnBorder background={darkTheme.primary} marginTop={"10px"}>
         <Header>
           <Row background={darkTheme.primary}>
             <ColumnHeader>First Name</ColumnHeader>
@@ -73,6 +74,8 @@ const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
         </Body>
       </Root>
     </ScrollArea>
+  ) : (
+    <EmptyTable />
   );
 };
 
