@@ -15,6 +15,7 @@ const Home = () => {
   const [dialogMode, setDialogMode] = useState("add");
   const [selectedExpenseId, setSelectedExpenseId] = useState("");
 
+  //data
   const [expenseData, setExpenseData] = useState([]);
 
   useEffect(() => {
@@ -40,12 +41,22 @@ const Home = () => {
   const onDeleteExpenseHandler = useCallback((expenseId) => {
     setIsOpenDeleteExpenseAlert(true);
     setSelectedExpenseId(expenseId);
-    console.log("here");
   }, []);
+
+  const onSearchDescription = (event) => {
+    const query = event.target.value.toLowerCase();
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedData) {
+      const filteredData = JSON.parse(storedData).filter((expense) =>
+        expense.description.toLowerCase().includes(query)
+      );
+      setExpenseData(filteredData);
+    }
+  };
 
   return (
     <>
-      <SearchInput placeHolder={"Search by description"}/>
+      <SearchInput placeHolder={"Search by description"} onChange={onSearchDescription}/>
       <Button onClick={onAddExpenseHandler}>Add Expense</Button>
       <ExpenseModalForm
         isFormOpened={isOpenAddExpenseForm}
