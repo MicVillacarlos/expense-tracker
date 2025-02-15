@@ -1,11 +1,18 @@
 /* eslint-disable react/prop-types */
 import { Table, Button } from "@chakra-ui/react";
+import { useMemo } from "react";
 
 const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
   const { Header, Body, Row, ColumnHeader, Cell, Root } = Table;
 
+  const totalPrice = useMemo(() => {
+    return items
+      .reduce((acc, expense) => acc + Number(expense.price), 0)
+      .toFixed(2);
+  }, [items]);
+
   return (
-    <Root size="sm">
+    <Root size="sm" showColumnBorder>
       <Header>
         <Row>
           <ColumnHeader>First Name</ColumnHeader>
@@ -24,7 +31,7 @@ const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
             <Cell>{item.lastName}</Cell>
             <Cell>{item.expense}</Cell>
             <Cell>{item.description}</Cell>
-            <Cell textAlign="end">{item.price}</Cell>
+            <Cell textAlign="end">{"$" + Number(item.price).toFixed(2)}</Cell>
             <Cell textAlign="start">{item.date}</Cell>
             <Cell textAlign="center">
               <Button
@@ -45,6 +52,15 @@ const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
             </Cell>
           </Row>
         ))}
+
+        <Row>
+          <Cell colSpan={6} fontWeight="bold" textAlign="right">
+            Total Price:
+          </Cell>
+          <Cell colSpan={1} fontWeight="bold" textAlign="left">
+            ${totalPrice}
+          </Cell>
+        </Row>
       </Body>
     </Root>
   );

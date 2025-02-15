@@ -1,7 +1,7 @@
 import ExpenseModalForm from "@/components/organims/dialog/ExpenseDialogForm";
 import ExpenseTable from "@/components/organims/table/ExpenseTable";
 import { Button } from "@chakra-ui/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState} from "react";
 import { LOCAL_STORAGE_KEY } from "@/config/config";
 import { Toaster } from "@/components/chakra/toaster";
 import AlertDialog from "@/components/organims/dialog/AlertDialog";
@@ -68,9 +68,7 @@ const Home = () => {
     setExpenseData(updatedData);
   };
 
-  const totalPrice = () => {
-    
-  }
+
   return (
     <>
       <WeekPicker onChange={onSelectWeekPicker} />
