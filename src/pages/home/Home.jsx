@@ -6,6 +6,8 @@ import { LOCAL_STORAGE_KEY } from "@/config/config";
 import { Toaster } from "@/components/chakra/toaster";
 import AlertDialog from "@/components/organims/dialog/AlertDialog";
 import SearchInput from "@/components/atoms/inputs/SearchInput";
+import WeekPicker from "@/components/atoms/date-picker/WeekPicker";
+import { filterExpensesByDate, weekToDateRange } from "@/utils/utils";
 
 const Home = () => {
   //dialog states
@@ -18,12 +20,16 @@ const Home = () => {
   //data
   const [expenseData, setExpenseData] = useState([]);
 
+  const fetchData = () => {
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedData) {
+      setExpenseData(JSON.parse(storedData));
+    }
+  };
+
   useEffect(() => {
-    if (!isOpenAddExpenseForm) {
-      const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (storedData) {
-        setExpenseData(JSON.parse(storedData));
-      }
+    if (!isOpenAddExpenseForm || !isOpenDeleteExpenseAlert) {
+      fetchData();
     }
   }, [isOpenAddExpenseForm, isOpenDeleteExpenseAlert]);
 
@@ -54,9 +60,24 @@ const Home = () => {
     }
   };
 
+  const onSelectWeekPicker = (event) => {
+    const dateRange = weekToDateRange(event.target.value);
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const parsedStoredData = JSON.parse(storedData);
+    const updatedData = filterExpensesByDate(parsedStoredData, dateRange);
+    setExpenseData(updatedData);
+  };
+
+  const totalPrice = () => {
+    
+  }
   return (
     <>
-      <SearchInput placeHolder={"Search by description"} onChange={onSearchDescription}/>
+      <WeekPicker onChange={onSelectWeekPicker} />
+      <SearchInput
+        placeHolder={"Search by description"}
+        onChange={onSearchDescription}
+      />
       <Button onClick={onAddExpenseHandler}>Add Expense</Button>
       <ExpenseModalForm
         isFormOpened={isOpenAddExpenseForm}

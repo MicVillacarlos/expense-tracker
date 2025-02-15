@@ -14,7 +14,7 @@ import { toaster } from "@/components/chakra/toaster";
 import { Field } from "@/components/chakra/field";
 import { useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "@/config/config";
-import { generateRandomId } from "@/utils/utils";
+import { generateRandomId, today } from "@/utils/utils";
 
 // eslint-disable-next-line react/prop-types
 const ExpenseModalForm = ({
@@ -173,6 +173,7 @@ const ExpenseModalForm = ({
                   onChange={handleChange}
                   placeholder="Input Date"
                   variant="subtle"
+                  max={today}
                 />
               </Field>
             </HStack>
