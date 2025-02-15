@@ -8,6 +8,7 @@ import {
   DialogRoot,
   DialogTitle,
 } from "@/components/chakra/dialog";
+import { toaster } from "@/components/chakra/toaster";
 
 import { Field } from "@/components/chakra/field";
 import { useEffect, useState } from "react";
@@ -42,8 +43,12 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
     const expenses = storedData ? JSON.parse(storedData) : [];
     const updatedExpenses = [...expenses, formData];
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedExpenses));
-  
+
     console.log("Updated Expense Data:", updatedExpenses);
+    toaster.success({
+      description: "Expense Added Successfully",
+      type: "Success",
+    })
 
     setIsFormOpened(false);
     setFormData({
@@ -55,7 +60,6 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
       description: "",
     });
   };
-  
 
   const onCancelHandler = () => {
     setFormData({
@@ -156,7 +160,9 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
 
             <DialogFooter marginTop={10}>
               <DialogActionTrigger asChild>
-                <Button type="button" onClick={onCancelHandler}>Cancel</Button>
+                <Button type="button" onClick={onCancelHandler}>
+                  Cancel
+                </Button>
               </DialogActionTrigger>
               <Button type="submit">Save</Button>
             </DialogFooter>

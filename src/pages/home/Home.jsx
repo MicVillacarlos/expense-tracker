@@ -3,6 +3,7 @@ import ExpenseTable from "@/components/organims/table/ExpenseTable";
 import { Button } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "@/config/config";
+import { Toaster } from "@/components/chakra/toaster";
 
 const Home = () => {
   const [isOpenAddExpenseForm, setIsOpenAddExpenseForm] = useState(false);
@@ -16,7 +17,6 @@ const Home = () => {
       }
     }
   }, [isOpenAddExpenseForm]);
-  console.log("Expense Data:", expenseData)
 
   return (
     <>
@@ -26,6 +26,7 @@ const Home = () => {
         setIsFormOpened={setIsOpenAddExpenseForm}
       />
       <ExpenseTable items={expenseData} />
+      <Toaster />
     </>
   );
 };
