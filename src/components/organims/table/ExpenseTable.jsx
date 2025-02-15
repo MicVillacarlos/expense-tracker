@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Table } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 const ExpenseTable = (props) => {
   const { items } = props;
@@ -11,6 +12,7 @@ const ExpenseTable = (props) => {
           <ColumnHeader>Product</ColumnHeader>
           <ColumnHeader>Category</ColumnHeader>
           <ColumnHeader textAlign="end">Price</ColumnHeader>
+          <ColumnHeader textAlign="center">Action</ColumnHeader>
         </Row>
       </Header>
       <Body>
@@ -19,6 +21,7 @@ const ExpenseTable = (props) => {
             <Cell>{item.name}</Cell>
             <Cell>{item.category}</Cell>
             <Cell textAlign="end">{item.price}</Cell>
+            <Cell textAlign='center'> <Button>Edit</Button> <Button>Delete</Button></Cell>
           </Row>
         ))}
       </Body>
