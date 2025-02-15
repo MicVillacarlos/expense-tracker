@@ -38,8 +38,13 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formData));
-    console.log("Expense Data:", formData);
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const expenses = storedData ? JSON.parse(storedData) : [];
+    const updatedExpenses = [...expenses, formData];
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedExpenses));
+  
+    console.log("Updated Expense Data:", updatedExpenses);
+
     setIsFormOpened(false);
     setFormData({
       firstName: "",
@@ -50,6 +55,7 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
       description: "",
     });
   };
+  
 
   const onCancelHandler = () => {
     setFormData({
