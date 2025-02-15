@@ -7,13 +7,14 @@ import {
   DialogHeader,
   DialogRoot,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/chakra/dialog";
 
 import { Field } from "@/components/chakra/field";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { LOCAL_STORAGE_KEY } from "@/config/config";
 
-const ExpenseModalForm = () => {
+// eslint-disable-next-line react/prop-types
+const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -24,6 +25,10 @@ const ExpenseModalForm = () => {
     description: "",
   });
 
+  useEffect(() => {
+    setOpen(isFormOpened);
+  }, [isFormOpened]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -33,16 +38,37 @@ const ExpenseModalForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formData));
     console.log("Expense Data:", formData);
-    setOpen(false);
+    setIsFormOpened(false);
+    setFormData({
+      firstName: "",
+      lastName: "",
+      expense: "",
+      price: "",
+      date: "",
+      description: "",
+    });
+  };
+
+  const onCancelHandler = () => {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      expense: "",
+      price: "",
+      date: "",
+      description: "",
+    });
+    setIsFormOpened(false);
   };
 
   return (
-    <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)}>
-      <DialogTrigger asChild>
-        <Button onClick={() => setOpen(true)}>Add Expense</Button>
-      </DialogTrigger>
-
+    <DialogRoot
+      lazyMount
+      open={open}
+      onOpenChange={(e) => setIsFormOpened(e.open)}
+    >
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add Expense</DialogTitle>
@@ -82,7 +108,7 @@ const ExpenseModalForm = () => {
               </Field>
             </HStack>
 
-            <HStack gap="8" width="full" marginTop={5}>
+            <HStack gap="8" width="full" marginTop={10}>
               <Field label="Price" required>
                 <Input
                   name="price"
@@ -105,22 +131,26 @@ const ExpenseModalForm = () => {
               </Field>
             </HStack>
 
-            <HStack gap="8" width="full" marginTop={5}>
-              <Field label="Description" required>
+            <HStack gap="8" width="full" marginTop={10}>
+              <Field label="Description">
                 <Textarea
                   name="description"
                   value={formData.description}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    if (e.target.value.length <= 100) {
+                      handleChange(e);
+                    }
+                  }}
                   placeholder="Input Description"
+                  helperText="Max 100 characters"
+                  maxLength={100}
                 />
               </Field>
             </HStack>
 
-            <DialogFooter marginTop={5}>
+            <DialogFooter marginTop={10}>
               <DialogActionTrigger asChild>
-                <Button type="button" onClick={() => setOpen(false)}>
-                  Cancel
-                </Button>
+                <Button type="button" onClick={onCancelHandler}>Cancel</Button>
               </DialogActionTrigger>
               <Button type="submit">Save</Button>
             </DialogFooter>
