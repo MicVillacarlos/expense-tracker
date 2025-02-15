@@ -25,7 +25,6 @@ const ExpenseModalForm = ({
   selectedExpenseId,
   setSelectedExpenseId,
 }) => {
-  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -50,7 +49,6 @@ const ExpenseModalForm = ({
   };
 
   useEffect(() => {
-    setOpen(isFormOpened);
 
     if (mode === "edit") {
       const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -63,7 +61,7 @@ const ExpenseModalForm = ({
         setFormData(selectedExpense);
       }
     }
-  }, [isFormOpened]);
+  }, [isFormOpened, mode, selectedExpenseId]);
 
   const handleChange = (e) => {
     setFormData({
@@ -114,7 +112,7 @@ const ExpenseModalForm = ({
   return (
     <DialogRoot
       lazyMount
-      open={open}
+      open={isFormOpened}
       onOpenChange={(e) => setIsFormOpened(e.open)}
     >
       <DialogContent>
