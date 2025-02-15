@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "@/config/config";
 import { Toaster } from "@/components/chakra/toaster";
 import AlertDialog from "@/components/organims/dialog/AlertDialog";
+import SearchInput from "@/components/atoms/inputs/SearchInput";
 
 const Home = () => {
   //dialog states
@@ -44,6 +45,7 @@ const Home = () => {
 
   return (
     <>
+      <SearchInput placeHolder={"Search by description"}/>
       <Button onClick={onAddExpenseHandler}>Add Expense</Button>
       <ExpenseModalForm
         isFormOpened={isOpenAddExpenseForm}
