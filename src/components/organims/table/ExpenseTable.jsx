@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import DeleteIcon from "@/components/atoms/icons/DeleteIcon";
+import { EditIcon } from "@/components/atoms/icons/EditIcon";
 import { darkTheme } from "@/theme/theme";
 import { Table, Button } from "@chakra-ui/react";
 import { useMemo } from "react";
@@ -13,7 +15,7 @@ const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
   }, [items]);
 
   return (
-    <Root size="sm" showColumnBorder background={darkTheme.primary} colorPalette={'blue'}>
+    <Root size="sm" showColumnBorder background={darkTheme.primary}>
       <Header>
         <Row>
           <ColumnHeader>First Name</ColumnHeader>
@@ -36,19 +38,20 @@ const ExpenseTable = ({ items, onEditExpense, onDeleteExpense }) => {
             <Cell textAlign="start">{item.date}</Cell>
             <Cell textAlign="center">
               <Button
-                colorScheme="blue"
-                size="sm"
+                variant={'ghost'}
+                size="xs"
                 mr={2}
                 onClick={() => onEditExpense(item.id)}
               >
-                Edit
+                <EditIcon/>
               </Button>
               <Button
+                variant={"ghost"}
                 colorScheme="red"
-                size="sm"
+                size="xs"
                 onClick={() => onDeleteExpense(item.id)}
               >
-                Delete
+                <DeleteIcon color={darkTheme.danger}/>
               </Button>
             </Cell>
           </Row>

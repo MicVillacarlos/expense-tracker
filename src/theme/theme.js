@@ -18,6 +18,7 @@ const themeColors = {
     primary: "#D4F1F4",
     secondary: "#75E6DA",
     tertiary: "#189AB4",
+    danger: "#D01110",
   },
 };
 
