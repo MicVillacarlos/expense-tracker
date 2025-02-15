@@ -49,7 +49,6 @@ const ExpenseModalForm = ({
   };
 
   useEffect(() => {
-
     if (mode === "edit") {
       const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
       const expenses = storedData ? JSON.parse(storedData) : [];
@@ -117,7 +116,7 @@ const ExpenseModalForm = ({
     >
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add Expense</DialogTitle>
+          <DialogTitle>{mode == "edit" ? "Edit" : "Add"}Expense</DialogTitle>
         </DialogHeader>
         <DialogBody>
           <form onSubmit={handleSubmit}>
