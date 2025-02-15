@@ -11,13 +11,12 @@ const themeColors = {
     tertiary: "#75E6DA",
   },
   dark: {
-    body: "#05445E",
-    text: "#D4F1F4",
-    transparent: "rgba(0,0,0,0.5)",
     // colors -------
-    primary: "#D4F1F4",
-    secondary: "#75E6DA",
-    tertiary: "#189AB4",
+    transparent: "rgba(0,0,0,0.5)",
+    primary: "#051422",
+    secondary: "#195779",
+    tertiary: "#5BAED9",
+    quarternary: "#AFDBF5",
     danger: "#D01110",
   },
 };
@@ -26,7 +25,7 @@ export const GlobalStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
   body {
-    background: ${({ theme }) => theme.body};
+    background: #05263B;
     color: ${({ theme }) => theme.text};
     font-family: 'Poppins', sans-serif;
   }

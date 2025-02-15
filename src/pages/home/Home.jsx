@@ -79,7 +79,7 @@ const Home = () => {
     <PageContainer>
       <HeaderContainer>
         <Text textStyle={"3xl"}>Expense Tracker</Text>
-        <Button background={darkTheme.primary} onClick={onAddExpenseHandler}>
+        <Button background={darkTheme.quarternary} onClick={onAddExpenseHandler}>
           Add Expense
         </Button>
       </HeaderContainer>

@@ -14,7 +14,7 @@ export const WeekPickerContainer = styled.div`
 export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 40%;`;
+  width: 35%;`;
 
 export const HeaderContainer = styled.div`
   display: flex;

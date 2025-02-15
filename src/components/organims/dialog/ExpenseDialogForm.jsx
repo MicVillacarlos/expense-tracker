@@ -17,7 +17,6 @@ import { LOCAL_STORAGE_KEY } from "@/config/config";
 import { generateRandomId, today } from "@/utils/utils";
 import { darkTheme } from "@/theme/theme";
 
-// eslint-disable-next-line react/prop-types
 const ExpenseModalForm = ({
   isFormOpened,
   setIsFormOpened,
@@ -115,11 +114,11 @@ const ExpenseModalForm = ({
       open={isFormOpened}
       onOpenChange={(e) => setIsFormOpened(e.open)}
     >
-      <DialogContent >
+      <DialogContent>
         <DialogHeader>
-          <DialogTitle>{mode == "edit" ? "Edit" : "Add"}Expense</DialogTitle>
+          <DialogTitle>{mode == "edit" ? "Edit" : "Add"} Expense</DialogTitle>
         </DialogHeader>
-        <DialogBody background={darkTheme.body}>
+        <DialogBody>
           <form onSubmit={handleSubmit}>
             <HStack gap="8" width="full" marginBottom={10}>
               <Field label="First Name" required>
@@ -129,6 +128,7 @@ const ExpenseModalForm = ({
                   onChange={handleChange}
                   placeholder="Input First Name"
                   variant="subtle"
+                  background={darkTheme.transparent}
                 />
               </Field>
               <Field label="Last Name" required>
@@ -138,6 +138,7 @@ const ExpenseModalForm = ({
                   onChange={handleChange}
                   placeholder="Input Last Name"
                   variant="outline"
+                  background={darkTheme.transparent}
                 />
               </Field>
             </HStack>
@@ -150,6 +151,7 @@ const ExpenseModalForm = ({
                   onChange={handleChange}
                   placeholder="Input Expense"
                   variant="subtle"
+                  background={darkTheme.transparent}
                 />
               </Field>
             </HStack>
@@ -163,6 +165,7 @@ const ExpenseModalForm = ({
                   onChange={handleChange}
                   placeholder="Input Price"
                   variant="subtle"
+                  background={darkTheme.transparent}
                 />
               </Field>
               <Field label="Date" required>
@@ -174,6 +177,7 @@ const ExpenseModalForm = ({
                   placeholder="Input Date"
                   variant="subtle"
                   max={today}
+                  background={darkTheme.transparent}
                 />
               </Field>
             </HStack>
@@ -191,17 +195,24 @@ const ExpenseModalForm = ({
                   placeholder="Input Description"
                   helperText="Max 100 characters"
                   maxLength={100}
+                  background={darkTheme.transparent}
                 />
               </Field>
             </HStack>
 
             <DialogFooter marginTop={10}>
               <DialogActionTrigger asChild>
-                <Button type="button" onClick={onCancelHandler}>
+                <Button
+                  type="button"
+                  variant={"outline"}
+                  onClick={onCancelHandler}
+                >
                   Cancel
                 </Button>
               </DialogActionTrigger>
-              <Button type="submit">Save</Button>
+              <Button type="submit" background={darkTheme.quarternary}>
+                Save
+              </Button>
             </DialogFooter>
           </form>
         </DialogBody>

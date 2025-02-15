@@ -44,8 +44,7 @@ const AlertDialog = ({
         </DialogHeader>
         <DialogBody>
           <p>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our systems.
+            This action cannot be undone. This will permanently your Expense.
           </p>
         </DialogBody>
         <DialogFooter>
