@@ -27,9 +27,10 @@ const Home = () => {
     setDialogMode("add");
   };
 
-  const onEditExpenseHandler = () => {
+  const onEditExpenseHandler = (expenseId) => {
     setIsOpenAddExpenseForm(true);
     setDialogMode("edit");
+    setSelectedExpenseId(expenseId);
   };
 
   return (
@@ -40,8 +41,10 @@ const Home = () => {
         setIsFormOpened={setIsOpenAddExpenseForm}
         mode={dialogMode}
         setMode={setDialogMode}
+        selectedExpenseId={selectedExpenseId}
+        setSelectedExpenseId={setSelectedExpenseId}
       />
-          <ExpenseTable items={expenseData} setSelectedExpenseId={setSelectedExpenseId} />
+      <ExpenseTable items={expenseData} onEditExpense={onEditExpenseHandler} />
       <Toaster />
     </>
   );

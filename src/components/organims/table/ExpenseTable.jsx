@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Table, Button } from "@chakra-ui/react";
 
-const ExpenseTable = ({ items }) => {
+const ExpenseTable = ({ items, onEditExpense }) => {
   const { Header, Body, Row, ColumnHeader, Cell, Root } = Table;
 
   return (
@@ -18,8 +18,8 @@ const ExpenseTable = ({ items }) => {
         </Row>
       </Header>
       <Body>
-        {items.map((item, index) => (
-          <Row key={index}>
+        {items.map((item) => (
+          <Row key={item.id}>
             <Cell>{item.firstName}</Cell>
             <Cell>{item.lastName}</Cell>
             <Cell>{item.expense}</Cell>
@@ -27,7 +27,7 @@ const ExpenseTable = ({ items }) => {
             <Cell textAlign="end">{item.price}</Cell>
             <Cell textAlign="start">{item.date}</Cell> 
             <Cell textAlign="center">
-              <Button colorScheme="blue" size="sm" mr={2}>Edit</Button>
+              <Button colorScheme="blue" size="sm" mr={2} onClick={()=>onEditExpense(item.id)}>Edit</Button>
               <Button colorScheme="red" size="sm">Delete</Button>
             </Cell>
           </Row>

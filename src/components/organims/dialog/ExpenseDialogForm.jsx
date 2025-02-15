@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Button, HStack, Input, Textarea } from "@chakra-ui/react";
 import {
   DialogActionTrigger,
@@ -16,7 +17,14 @@ import { LOCAL_STORAGE_KEY } from "@/config/config";
 import { generateRandomId } from "@/utils/utils";
 
 // eslint-disable-next-line react/prop-types
-const ExpenseModalForm = ({ isFormOpened, setIsFormOpened, mode, setMode }) => {
+const ExpenseModalForm = ({
+  isFormOpened,
+  setIsFormOpened,
+  mode,
+  setMode,
+  selectedExpenseId,
+  setSelectedExpenseId,
+}) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -27,12 +35,33 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened, mode, setMode }) => {
     description: "",
   });
 
+  const resetForm = () => {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      expense: "",
+      price: "",
+      date: "",
+      description: "",
+    });
+    setIsFormOpened(false);
+    setMode("add");
+    setSelectedExpenseId("");
+  };
+
   useEffect(() => {
     setOpen(isFormOpened);
 
-    if (mode == "edit") {
-    } else {
+    if (mode === "edit") {
+      const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const expenses = storedData ? JSON.parse(storedData) : [];
+      const selectedExpense = expenses.find(
+        (item) => item.id === selectedExpenseId
+      );
 
+      if (selectedExpense) {
+        setFormData(selectedExpense);
+      }
     }
   }, [isFormOpened]);
 
@@ -45,41 +74,41 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened, mode, setMode }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
     const expenses = storedData ? JSON.parse(storedData) : [];
-    const newExpense = { ...formData, id: generateRandomId() };
-    const updatedExpenses = [...expenses, newExpense];
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedExpenses));
 
-    console.log("Updated Expense Data:", updatedExpenses);
-    toaster.success({
-      description: "Expense Added Successfully",
-      type: "Success",
-    });
+    if (mode === "add") {
+      const newExpense = { ...formData, id: generateRandomId() };
+      const updatedExpenses = [...expenses, newExpense];
 
-    setIsFormOpened(false);
-    setFormData({
-      firstName: "",
-      lastName: "",
-      expense: "",
-      price: "",
-      date: "",
-      description: "",
-    });
-    setMode('add')
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedExpenses));
+
+      toaster.success({
+        description: "Expense Added Successfully",
+        type: "Success",
+      });
+    } else {
+      // Edit mode: update the existing expense
+      const updatedExpenses = expenses.map((expense) =>
+        expense.id === selectedExpenseId
+          ? { ...formData, id: selectedExpenseId }
+          : expense
+      );
+
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedExpenses));
+
+      toaster.success({
+        description: "Expense Successfully Updated",
+        type: "Success",
+      });
+    }
+
+    resetForm();
   };
 
   const onCancelHandler = () => {
-    setFormData({
-      firstName: "",
-      lastName: "",
-      expense: "",
-      price: "",
-      date: "",
-      description: "",
-    });
-    setIsFormOpened(false);
-    setMode('add')
+    resetForm();
   };
 
   return (
