@@ -12,7 +12,6 @@ const WeekPicker = ({ onChange }) => {
       name="week"
       type="week"
       placeholder="Select Week"
-      variant="subtle"
       max={week}
       onChange={onChange}
       background={darkTheme.transparent}
