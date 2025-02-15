@@ -13,9 +13,10 @@ import { toaster } from "@/components/chakra/toaster";
 import { Field } from "@/components/chakra/field";
 import { useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "@/config/config";
+import { generateRandomId } from "@/utils/utils";
 
 // eslint-disable-next-line react/prop-types
-const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
+const ExpenseModalForm = ({ isFormOpened, setIsFormOpened, mode, setMode }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -28,6 +29,11 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
 
   useEffect(() => {
     setOpen(isFormOpened);
+
+    if (mode == "edit") {
+    } else {
+
+    }
   }, [isFormOpened]);
 
   const handleChange = (e) => {
@@ -41,14 +47,15 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
     e.preventDefault();
     const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
     const expenses = storedData ? JSON.parse(storedData) : [];
-    const updatedExpenses = [...expenses, formData];
+    const newExpense = { ...formData, id: generateRandomId() };
+    const updatedExpenses = [...expenses, newExpense];
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedExpenses));
 
     console.log("Updated Expense Data:", updatedExpenses);
     toaster.success({
       description: "Expense Added Successfully",
       type: "Success",
-    })
+    });
 
     setIsFormOpened(false);
     setFormData({
@@ -59,6 +66,7 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
       date: "",
       description: "",
     });
+    setMode('add')
   };
 
   const onCancelHandler = () => {
@@ -71,6 +79,7 @@ const ExpenseModalForm = ({ isFormOpened, setIsFormOpened }) => {
       description: "",
     });
     setIsFormOpened(false);
+    setMode('add')
   };
 
   return (

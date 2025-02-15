@@ -6,7 +6,11 @@ import { LOCAL_STORAGE_KEY } from "@/config/config";
 import { Toaster } from "@/components/chakra/toaster";
 
 const Home = () => {
+  //dialog states
   const [isOpenAddExpenseForm, setIsOpenAddExpenseForm] = useState(false);
+  const [dialogMode, setDialogMode] = useState("add");
+  const [selectedExpenseId, setSelectedExpenseId] = useState("");
+
   const [expenseData, setExpenseData] = useState([]);
 
   useEffect(() => {
@@ -18,14 +22,26 @@ const Home = () => {
     }
   }, [isOpenAddExpenseForm]);
 
+  const onAddExpenseHandler = () => {
+    setIsOpenAddExpenseForm(true);
+    setDialogMode("add");
+  };
+
+  const onEditExpenseHandler = () => {
+    setIsOpenAddExpenseForm(true);
+    setDialogMode("edit");
+  };
+
   return (
     <>
-      <Button onClick={() => setIsOpenAddExpenseForm(true)}>Add Expense</Button>
+      <Button onClick={onAddExpenseHandler}>Add Expense</Button>
       <ExpenseModalForm
         isFormOpened={isOpenAddExpenseForm}
         setIsFormOpened={setIsOpenAddExpenseForm}
+        mode={dialogMode}
+        setMode={setDialogMode}
       />
-      <ExpenseTable items={expenseData} />
+          <ExpenseTable items={expenseData} setSelectedExpenseId={setSelectedExpenseId} />
       <Toaster />
     </>
   );
