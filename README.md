@@ -46,3 +46,15 @@ If I had more time, I would:
 3. Customize the favicon and update the tab title to "Expense Tracker" for better branding.
 
 Additionally, I followed the Atomic Design methodology for structuring the components folder to keep the project well-organized. You might find a `chakra` folder inside the `components` folder. If given more time, I would move it outside, as it does not strictly follow the Atomic Design methodology.
+
+### Assumptions
+
+1. A lightweight UI framework like Chakra UI would be more suitable for a small-scale application with limited time for development.
+2. Given the time limit, I prioritized functionality over styling, assuming that visual refinements were secondary. After all, aesthetics are meaningless if the app doesn’t function properly.
+3. I assumed that error handling was not a primary requirement since no specific instructions were provided regarding how failures should be displayed.
+4. Updating and deleting were not part of the instructions, but since it is a tracker app, I assumed it should include basic CRUD operations.
+5. The instructions specified that the app should be mobile-friendly, but given the time constraints, I assumed that a fully optimized mobile experience was not the highest priority. I focused on ensuring a functional and responsive design while prioritizing the desktop and tablet experience first.
+
+### Feedback
+
+1. The test effectively evaluates a candidate's ability to work under pressure and meet time constraints. It also closely simulates real-life work scenarios, making it a strong take-home assessment.
