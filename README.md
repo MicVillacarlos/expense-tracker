@@ -58,3 +58,5 @@ Additionally, I followed the Atomic Design methodology for structuring the compo
 ### Feedback
 
 1. The test effectively evaluates a candidate's ability to work under pressure and meet time constraints. It also closely simulates real-life work scenarios, making it a strong take-home assessment.
+
+### Liv Link : https://luminous-biscochitos-bc4903.netlify.app/
